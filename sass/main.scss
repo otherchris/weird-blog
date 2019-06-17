@@ -1,10 +1,41 @@
 * {
   box-sizing: border-box;
-  background-color: pink;
+}
+
+body {
 }
 
 #index-container {
+  /* placeholders */
+  background-color: pink;
+
+  /* postition the mainframe */
   width: 80%;
-  background-color: red;
+  margin-left: 10%;
   height: 80vh;
+  margin-top: 10vh;
+
+  /* border the mainframe */
+  border: 10px solid black;
+
+  /* animate the color */
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-name: colorfade;
 }
+
+@keyframes colorfade {
+  from {
+    background-color: rgb(254, 170, 246);
+  }
+
+  75% {
+    background-color: rgb(170, 241, 254);
+  }
+
+  to {
+    background-color: rgb(254, 170, 246);
+  }
+}
+
+
