@@ -1,32 +1,14 @@
-/* colors */
+@import './colors';
+@import './index-box';
 
-$pink : rgb(254, 170, 246);
-$blue : rgb(170, 241, 254);
-$green : rgb(152, 254, 177);
-$yellow : rgb(243, 254, 163);
 * {
   box-sizing: border-box;
 }
 
 body {
-}
-
-#index-container {
-  /* placeholders */
-  background-image: linear-gradient(-45deg, $pink, $green, $blue, $yellow);
-
-  /* postition the mainframe */
-  width: 80%;
-  margin-left: 10%;
-  height: 80vh;
-  margin-top: 10vh;
-
-  /* border the mainframe */
-
-  /* animate the color */
-  animation-duration: 20s;
+  animation-duration: 10s;
   animation-iteration-count: infinite;
-  animation-name: background-dance;
+  animation-name: colorfade;
 }
 
 @keyframes colorfade {
@@ -45,28 +27,38 @@ body {
 
 @keyframes background-dance {
   from {
-    background-size: 400% 400%;
-    background-position: 0% 50%;
+    background-size: 300% 300%;
+    background-position: 0% 0%;
   }
 
-  25% {
-    background-size: 400% 400%;
-    background-position: 50% 100%;
+  15% {
+    background-size: 300% 300%;
+    background-position: 100% 100%;
+  }
+
+  34% {
+    background-size: 300% 300%;
+    background-position: 50% 0%;
   }
 
   50% {
-    background-size: 400% 400%;
-    background-position: 100% 50%;
-  }
-
-  75% {
-    background-size: 400% 400%;
+    background-size: 300% 300%;
     background-position: 50% 100%;
   }
 
+  67% {
+    background-size: 300% 300%;
+    background-position: 0% 100%;
+  }
+
+  85% {
+    background-size: 300% 300%;
+    background-position: 50% 50%;
+  }
+
   to {
-    background-size: 400% 400%;
-    background-position: 0% 50%;
+    background-size: 300% 300%;
+    background-position: 0% 0%;
   }
 }
 

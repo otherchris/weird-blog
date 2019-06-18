@@ -1,17 +1,19 @@
-/* colors */
 .index-box {
   /* placeholders */
   /* background-image: linear-gradient(-45deg, $pink, $green, $blue, $yellow);
    * */
   background-image: url("../assets/bloo.png");
-  background-image: linear-gradient(-45deg, #feaaf6, #98feb1, #aaf1fe, #f3fea3);
+  background-image: linear-gradient(-45deg, $pink, $green, $blue, $yellow);
+
   /* postition the mainframe */
   width: 15%;
   margin-left: 7.5%;
   margin-right: 7.5%;
   height: 80vh;
   margin-top: 10vh;
+
   /* border the mainframe */
+
   /* animate the color */
   animation-duration: 20s;
   animation-iteration-count: infinite;
@@ -21,15 +23,13 @@
 .index-box .alpha {
   margin-left: 7.5%;
 }
-
 .index-box:hover .alpha {
   background-image: url("../assets/bloo.png");
 }
 
-.index-box .bravo {
+.index-box .bravo{
   margin-left: 45%;
 }
-
 .index-box:hover .bravo {
   background-image: url("../assets/eye.png");
 }
@@ -41,87 +41,40 @@
 .index-box:hover .delta {
   background-image: url("../assets/bloo.png");
 }
-
 @keyframes background-dance {
   from {
     background-size: 300% 300%;
     background-position: 0% 0%;
   }
+
   15% {
     background-size: 300% 300%;
     background-position: 100% 100%;
   }
+
   34% {
     background-size: 300% 300%;
     background-position: 50% 0%;
   }
+
   50% {
     background-size: 300% 300%;
     background-position: 50% 100%;
   }
+
   67% {
     background-size: 300% 300%;
     background-position: 0% 100%;
   }
+
   85% {
     background-size: 300% 300%;
     background-position: 50% 50%;
   }
-  to {
-    background-size: 300% 300%;
-    background-position: 0% 0%;
-  }
-}
-* {
-  box-sizing: border-box;
-}
 
-body {
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-name: colorfade;
-}
-
-@keyframes colorfade {
-  from {
-    background-color: #feaaf6;
-  }
-  75% {
-    background-color: #aaf1fe;
-  }
-  to {
-    background-color: #feaaf6;
-  }
-}
-@keyframes background-dance {
-  from {
-    background-size: 300% 300%;
-    background-position: 0% 0%;
-  }
-  15% {
-    background-size: 300% 300%;
-    background-position: 100% 100%;
-  }
-  34% {
-    background-size: 300% 300%;
-    background-position: 50% 0%;
-  }
-  50% {
-    background-size: 300% 300%;
-    background-position: 50% 100%;
-  }
-  67% {
-    background-size: 300% 300%;
-    background-position: 0% 100%;
-  }
-  85% {
-    background-size: 300% 300%;
-    background-position: 50% 50%;
-  }
   to {
     background-size: 300% 300%;
     background-position: 0% 0%;
   }
 }
 
-/*# sourceMappingURL=main.css.map */
