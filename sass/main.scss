@@ -9,6 +9,9 @@ body {
   animation-duration: 10s;
   animation-iteration-count: infinite;
   animation-name: colorfade;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 @keyframes colorfade {

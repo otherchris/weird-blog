@@ -1,18 +1,14 @@
 .index-box {
+  display: inline-block;
   /* placeholders */
   /* background-image: linear-gradient(-45deg, $pink, $green, $blue, $yellow);
    * */
   background-image: url("../assets/bloo.png");
   background-image: linear-gradient(-45deg, $pink, $green, $blue, $yellow);
 
-  /* postition the mainframe */
-  width: 15%;
-  margin-left: 7.5%;
-  margin-right: 7.5%;
-  height: 80vh;
-  margin-top: 10vh;
-
-  /* border the mainframe */
+  width: 25%;
+  height: 75vh;
+  margin-top: 12.5vh;
 
   /* animate the color */
   animation-duration: 20s;
@@ -20,27 +16,18 @@
   animation-name: background-dance;
 }
 
-.index-box .alpha {
-  margin-left: 7.5%;
-}
-.index-box:hover .alpha {
+.alpha:hover {
   background-image: url("../assets/bloo.png");
 }
 
-.index-box .bravo{
-  margin-left: 45%;
-}
-.index-box:hover .bravo {
+.bravo:hover {
   background-image: url("../assets/eye.png");
 }
 
-.index-box:hover .charlie {
+.charlie:hover {
   background-image: url("../assets/tech.png");
 }
 
-.index-box:hover .delta {
-  background-image: url("../assets/bloo.png");
-}
 @keyframes background-dance {
   from {
     background-size: 300% 300%;
