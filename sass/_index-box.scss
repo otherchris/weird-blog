@@ -3,7 +3,6 @@
   /* placeholders */
   /* background-image: linear-gradient(-45deg, $pink, $green, $blue, $yellow);
    * */
-  background-image: url("../assets/bloo.png");
   background-image: linear-gradient(-45deg, $pink, $green, $blue, $yellow);
 
   width: 25%;
@@ -16,8 +15,9 @@
   animation-name: background-dance;
 }
 
-.alpha:hover {
+.bloo:hover {
   background-image: url("../assets/bloo.png");
+  font-color: black;
 }
 
 .bravo:hover {
