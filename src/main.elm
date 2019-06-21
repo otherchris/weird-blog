@@ -1,9 +1,7 @@
 import Browser
 import Html exposing (Html, button, div, text, img)
 import Html.Attributes exposing (class, style, src)
-import Html.Events exposing (onMouseIn, onMouseOut)
-
-type BoxShape = Tall | Wide | Square
+import Html.Events exposing (onMouseEnter, onMouseLeave)
 
 type DoorState = Open | Closed
 type alias Door = {
@@ -13,37 +11,50 @@ type alias Door = {
         state : DoorState
     }
 
-door : Door -> Html Msg
-door dr =
-        case dr.state of
-                Open -> doorDiv dr.openSrc
-                Closed -> doorDiv dr.closedSrc
-
-doorDiv : String -> Html Msg
-doorDiv source =
+doorDiv : Door -> Html Msg
+doorDiv dr =
         div [
-                class "door"
-                on
+                class "door",
+                onMouseEnter {id = dr.id, doorState = Open},
+                onMouseLeave{id = dr.id, doorState = Closed}
                 ] [
-                img [src source] []
+                img [src (getSrc dr)] []
                 ]
-main =
-  Browser.sandbox { init = 0, update = update, view = view }
 
-type Msg = Increment | Decrement
+getSrc : Door -> String
+getSrc dr =
+  case dr.state of
+    Open -> dr.openSrc
+    Closed -> dr.closedSrc
+
+-- MODEL
 
 type alias Model = {
         doors : List Door
         }
 
-update msg model =
-  case msg of
-    Increment ->
-      model + 1
+-- UPDATE
 
-    Decrement ->
-      model - 1
+type alias Msg = {id : String, doorState : DoorState}
+
+update : Msg -> Model -> Model
+update msg model =
+  { model | doors = updateDoors msg model.doors }
+
+updateDoors : Msg -> List Door -> List Door
+updateDoors msg drs =
+  List.map (\dr -> if msg.id == dr.id then { dr | state = msg.doorState } else dr) drs
+
+-- VIEW
 
 view model =
-  div [ style "width" "100%" ] [
-    ]
+  div [ style "width" "100%" ] (List.map doorDiv model.doors)
+
+
+main =
+  Browser.sandbox { init = {doors = [{
+    id = "bloo",
+    closedSrc = "assets/eye.png",
+    openSrc = "assets/bloo.png",
+    state = Closed
+  }]}, update = update, view = view }
