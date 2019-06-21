@@ -6,26 +6,30 @@ import Html.Events exposing (onMouseEnter, onMouseLeave)
 type DoorState = Open | Closed
 type alias Door = {
         id : String,
-        closedSrc : String,
-        openSrc : String,
+        src : String,
         state : DoorState
     }
 
 doorDiv : Door -> Html Msg
 doorDiv dr =
+  case dr.state of
+    Open ->
         div [
                 class "door",
                 onMouseEnter {id = dr.id, doorState = Open},
                 onMouseLeave{id = dr.id, doorState = Closed}
                 ] [
-                img [src (getSrc dr)] []
+                img [src dr.src] []
                 ]
-
-getSrc : Door -> String
-getSrc dr =
-  case dr.state of
-    Open -> dr.openSrc
-    Closed -> dr.closedSrc
+    Closed ->
+        div [
+                class "door",
+                onMouseEnter {id = dr.id, doorState = Open},
+                onMouseLeave{id = dr.id, doorState = Closed}
+                ] [
+                img [style "display" "none", src dr.src] [],
+                text "a"
+                ]
 
 -- MODEL
 
@@ -54,7 +58,6 @@ view model =
 main =
   Browser.sandbox { init = {doors = [{
     id = "bloo",
-    closedSrc = "assets/eye.png",
-    openSrc = "assets/bloo.png",
+    src = "assets/eye.png",
     state = Closed
   }]}, update = update, view = view }

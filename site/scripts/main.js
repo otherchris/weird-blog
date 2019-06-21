@@ -4505,14 +4505,6 @@ var author$project$Main$update = F2(
 			});
 	});
 var author$project$Main$Open = {$: 'Open'};
-var author$project$Main$getSrc = function (dr) {
-	var _n0 = dr.state;
-	if (_n0.$ === 'Open') {
-		return dr.openSrc;
-	} else {
-		return dr.closedSrc;
-	}
-};
 var elm$core$Basics$identity = function (x) {
 	return x;
 };
@@ -4903,6 +4895,8 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 };
 var elm$html$Html$div = _VirtualDom_node('div');
 var elm$html$Html$img = _VirtualDom_node('img');
+var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
 var elm$json$Json$Encode$string = _Json_wrap;
 var elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -4918,6 +4912,8 @@ var elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
+var elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var elm$html$Html$Attributes$style = elm$virtual_dom$VirtualDom$style;
 var elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -4942,30 +4938,53 @@ var elm$html$Html$Events$onMouseLeave = function (msg) {
 		elm$json$Json$Decode$succeed(msg));
 };
 var author$project$Main$doorDiv = function (dr) {
-	return A2(
-		elm$html$Html$div,
-		_List_fromArray(
-			[
-				elm$html$Html$Attributes$class('door'),
-				elm$html$Html$Events$onMouseEnter(
-				{doorState: author$project$Main$Open, id: dr.id}),
-				elm$html$Html$Events$onMouseLeave(
-				{doorState: author$project$Main$Closed, id: dr.id})
-			]),
-		_List_fromArray(
-			[
-				A2(
-				elm$html$Html$img,
-				_List_fromArray(
-					[
-						elm$html$Html$Attributes$src(
-						author$project$Main$getSrc(dr))
-					]),
-				_List_Nil)
-			]));
+	var _n0 = dr.state;
+	if (_n0.$ === 'Open') {
+		return A2(
+			elm$html$Html$div,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('door'),
+					elm$html$Html$Events$onMouseEnter(
+					{doorState: author$project$Main$Open, id: dr.id}),
+					elm$html$Html$Events$onMouseLeave(
+					{doorState: author$project$Main$Closed, id: dr.id})
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$img,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$src(dr.src)
+						]),
+					_List_Nil)
+				]));
+	} else {
+		return A2(
+			elm$html$Html$div,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('door'),
+					elm$html$Html$Events$onMouseEnter(
+					{doorState: author$project$Main$Open, id: dr.id}),
+					elm$html$Html$Events$onMouseLeave(
+					{doorState: author$project$Main$Closed, id: dr.id})
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$img,
+					_List_fromArray(
+						[
+							A2(elm$html$Html$Attributes$style, 'display', 'none'),
+							elm$html$Html$Attributes$src(dr.src)
+						]),
+					_List_Nil),
+					elm$html$Html$text('a')
+				]));
+	}
 };
-var elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var elm$html$Html$Attributes$style = elm$virtual_dom$VirtualDom$style;
 var author$project$Main$view = function (model) {
 	return A2(
 		elm$html$Html$div,
@@ -5228,7 +5247,7 @@ var author$project$Main$main = elm$browser$Browser$sandbox(
 		init: {
 			doors: _List_fromArray(
 				[
-					{closedSrc: 'assets/eye.png', id: 'bloo', openSrc: 'assets/bloo.png', state: author$project$Main$Closed}
+					{id: 'bloo', src: 'assets/eye.png', state: author$project$Main$Closed}
 				])
 		},
 		update: author$project$Main$update,
