@@ -65,6 +65,6 @@ var defaultPlayer = new Player({
   type: 'sine'
 });
 var sawPlayer = new Player({
-  frequency: 300,
+  frequency: 200,
   type: 'sawtooth'
 });
