@@ -1,14 +1,12 @@
 /* colors */
-.door {
+.panel {
   display: inline-block;
   /* placeholders */
   /* background-image: linear-gradient(-45deg, $pink, $green, $blue, $yellow);
    * */
   background-image: linear-gradient(-45deg, #feaaf6, #98feb1, #aaf1fe, #f3fea3);
-  min-width: 25%;
-  max-width: 25%;
-  min-height: 75vh;
-  max-height: 75vh;
+  min-width: 60%;
+  max-width: 60%;
   margin-top: 12.5vh;
   /* animate the color */
   animation-duration: 20s;
@@ -16,7 +14,12 @@
   animation-name: background-dance;
 }
 
-img {
+div.img-box {
+  width: 100%;
+}
+
+div.img-box img {
+  width: 100%;
   object-fit: cover;
 }
 
@@ -50,6 +53,18 @@ img {
     background-position: 0% 0%;
   }
 }
+div.go-button {
+  display: flex;
+  width: 66.7%;
+  margin-left: 16.65%;
+  justify-content: space-evenly;
+}
+
+div.text-input {
+  display: flex;
+  flex-direction: column;
+}
+
 * {
   box-sizing: border-box;
 }

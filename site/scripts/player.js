@@ -6,19 +6,18 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var Player =
+var Voice =
 /*#__PURE__*/
 function () {
-  function Player(params) {
-    _classCallCheck(this, Player);
+  function Voice(params) {
+    _classCallCheck(this, Voice);
 
     var type = params.type,
-        frequency = params.frequency,
-        duration = params.duration;
+        frequency = params.frequency;
     var context = new window.AudioContext() || window.webkitAudioContext();
     var osc = context.createOscillator();
     var gainControl = context.createGain();
-    osc.type = type;
+    osc.type = 'square';
     gainControl.gain.value = 0;
     osc.connect(gainControl);
     gainControl.connect(context.destination);
@@ -29,126 +28,146 @@ function () {
     this.context = context;
   }
 
-  _createClass(Player, [{
-    key: "play",
-    value: function play(frequency, duration) {
-      var _this = this;
-
-      this.osc.frequency.setValueAtTime(frequency, this.context.currentTime);
-      this.gainControl.gain.value = 1;
-      setTimeout(function () {
-        _this.gainControl.gain.value = 0;
-      }, duration);
-    }
-  }, {
+  _createClass(Voice, [{
     key: "on",
     value: function on() {
       this.gainControl.gain.value = 1;
-    }
-  }, {
-    key: "half",
-    value: function half() {
-      this.gainControl.gain.value = 0.2;
     }
   }, {
     key: "off",
     value: function off() {
       this.gainControl.gain.value = 0;
     }
+  }]);
+
+  return Voice;
+}();
+
+var Player =
+/*#__PURE__*/
+function () {
+  function Player(params) {
+    _classCallCheck(this, Player);
+  }
+
+  _createClass(Player, [{
+    key: "keyDown",
+    value: function keyDown(key) {
+      Player.KEYS[key].voice.on();
+    }
   }, {
-    key: "setFreq",
-    value: function setFreq(freq) {
-      this.osc.frequency.setValueAtTime(freq, this.context.currentTime);
+    key: "keyUp",
+    value: function keyUp(key) {
+      Player.KEYS[key].voice.off();
+    }
+  }, {
+    key: "keyDownHandler",
+    value: function keyDownHandler(e) {
+      if (!Player.KEYS[e.key]) {
+        return;
+      }
+
+      this.keyDown(e.key);
+    }
+  }, {
+    key: "keyUpHandler",
+    value: function keyUpHandler(e) {
+      this.keyUp(e.key);
+    }
+  }], [{
+    key: "KEYS",
+    get: function get() {
+      return _KEYS;
     }
   }]);
 
   return Player;
 }();
 
-var OscPlayer =
-/*#__PURE__*/
-function () {
-  function OscPlayer(params) {
-    _classCallCheck(this, OscPlayer);
-
-    var real = params.real,
-        imag = params.imag,
-        frequency = params.frequency,
-        duration = params.duration;
-    this.real = real;
-    var context = new window.AudioContext() || window.webkitAudioContext();
-    var osc = context.createOscillator();
-    var gainControl = context.createGain();
-    var wave = context.createPeriodicWave(real, imag, {
-      disableNormalization: true
-    });
-    osc.setPeriodicWave(wave);
-    gainControl.gain.value = 0;
-    osc.connect(gainControl);
-    gainControl.connect(context.destination);
-    osc.frequency.setValueAtTime(frequency, context.currentTime);
-    osc.start();
-    this.osc = osc;
-    this.gainControl = gainControl;
-    this.context = context;
+var _KEYS = {
+  'a': {
+    voice: new Voice({
+      frequency: 130.81
+    })
+  },
+  'w': {
+    voice: new Voice({
+      frequency: 138.59
+    })
+  },
+  's': {
+    voice: new Voice({
+      frequency: 146.83
+    })
+  },
+  'e': {
+    voice: new Voice({
+      frequency: 155.56
+    })
+  },
+  'd': {
+    voice: new Voice({
+      frequency: 164.81
+    })
+  },
+  'f': {
+    voice: new Voice({
+      frequency: 174.61
+    })
+  },
+  't': {
+    voice: new Voice({
+      frequency: 185.01
+    })
+  },
+  'g': {
+    voice: new Voice({
+      frequency: 196.01
+    })
+  },
+  'y': {
+    voice: new Voice({
+      frequency: 207.65
+    })
+  },
+  'h': {
+    voice: new Voice({
+      frequency: 220.00
+    })
+  },
+  'u': {
+    voice: new Voice({
+      frequency: 233.08
+    })
+  },
+  'j': {
+    voice: new Voice({
+      frequency: 246.94
+    })
+  },
+  'k': {
+    voice: new Voice({
+      frequency: 261.63
+    })
+  },
+  'o': {
+    voice: new Voice({
+      frequency: 277.18
+    })
+  },
+  'l': {
+    voice: new Voice({
+      frequency: 293.66
+    })
+  },
+  'p': {
+    voice: new Voice({
+      frequency: 311.13
+    })
+  },
+  ';': {
+    voice: new Voice({
+      frequency: 329.63
+    })
   }
-
-  _createClass(OscPlayer, [{
-    key: "play",
-    value: function play(frequency, duration) {
-      var _this2 = this;
-
-      this.osc.frequency.setValueAtTime(frequency, this.context.currentTime);
-      this.gainControl.gain.value = 1;
-      setTimeout(function () {
-        _this2.gainControl.gain.value = 0;
-      }, duration);
-    }
-  }, {
-    key: "on",
-    value: function on() {
-      this.gainControl.gain.value = 1;
-    }
-  }, {
-    key: "half",
-    value: function half() {
-      this.gainControl.gain.value = 0.1;
-    }
-  }, {
-    key: "off",
-    value: function off() {
-      this.gainControl.gain.value = 0;
-    }
-  }, {
-    key: "setFreq",
-    value: function setFreq(freq) {
-      this.osc.frequency.setValueAtTime(freq, this.context.currentTime);
-    }
-  }]);
-
-  return OscPlayer;
-}();
-
-var defaultPlayer = new Player({
-  frequency: 440,
-  type: 'triangle'
-});
-defaultPlayer.on();
-setInterval(function () {
-  var freq = Math.random() * 500;
-  osc1.setFreq(freq);
-}, 100);
-setInterval(function () {
-  var freq = Math.random() * 500;
-  defaultPlayer.setFreq(freq);
-}, 1000);
-var sawPlayer = new Player({
-  frequency: 200,
-  type: 'sawtooth'
-});
-var osc1 = new OscPlayer({
-  real: new Float32Array([0, 1, 1, 0.5, 1, 0, 0, 0, 0, -1, 1, 1, 1, 0, 1]),
-  imag: new Float32Array([1, 0, 1, 0, -1, 0, 0.5, 1, 1, 0, -0.5, 0.5, 0.5, 0.5, 0]),
-  frequency: 150,
-  duration: 1000
-});
+};

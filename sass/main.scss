@@ -1,5 +1,7 @@
 @import './colors';
-@import './door';
+@import './panel';
+@import './go-button';
+@import './inputs';
 
 * {
   box-sizing: border-box;
@@ -64,4 +66,3 @@ body {
     background-position: 0% 0%;
   }
 }
-

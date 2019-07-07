@@ -1,14 +1,12 @@
-.door {
+.panel{
   display: inline-block;
   /* placeholders */
   /* background-image: linear-gradient(-45deg, $pink, $green, $blue, $yellow);
    * */
   background-image: linear-gradient(-45deg, $pink, $green, $blue, $yellow);
 
-  min-width: 25%;
-  max-width: 25%;
-  min-height: 75vh;
-  max-height: 75vh;
+  min-width: 60%;
+  max-width: 60%;
   margin-top: 12.5vh;
 
   /* animate the color */
@@ -17,9 +15,15 @@
   animation-name: background-dance;
 }
 
-img {
+div.img-box {
+  width: 100%;
+}
+
+div.img-box img {
+  width: 100%;
   object-fit: cover;
 }
+
 
 @keyframes background-dance {
   from {

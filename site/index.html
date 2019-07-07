@@ -8,8 +8,15 @@
   </head>
 
   <body>
-    <div class="door" onmouseover="osc1.half()" onmouseout="osc1.off()">
-      [-\|/-\|/-]
+    <div class="panel">
+      <div class="img-box">
+        <img src="assets/piano.png" alt="piano keys">
+      </div>
     </div>
+    <script>
+      var mainPlayer = new Player({ });
+      document.addEventListener('keydown', mainPlayer.keyDownHandler.bind(mainPlayer));
+      document.addEventListener('keyup', mainPlayer.keyUpHandler.bind(mainPlayer));
+    </script>
   </body>
 </html>
