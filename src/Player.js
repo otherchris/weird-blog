@@ -6,7 +6,7 @@ class Voice {
     const osc = context.createOscillator();
     const gainControl = context.createGain();
 
-    osc.type = 'square';
+    osc.type = type || 'sine';
     gainControl.gain.value = 0;
     osc.connect(gainControl);
     gainControl.connect(context.destination);
@@ -17,6 +17,7 @@ class Voice {
     this.osc = osc;
     this.gainControl = gainControl;
     this.context = context;
+    this.frequency = frequency;
   }
 
   on() {
@@ -25,6 +26,17 @@ class Voice {
 
   off() {
     this.gainControl.gain.value = 0;
+  }
+
+  setType(type) {
+    delete this.osc
+    const osc = this.context.createOscillator();
+    osc.type = type || 'sine';
+    osc.connect(this.gainControl);
+    osc.frequency.setValueAtTime(frequency, context.currentTime);
+    osc.start();
+
+    this.osc = osc;
   }
 }
 
@@ -36,26 +48,30 @@ class Player {
     return _KEYS;
   }
 
-  keyDown(key) {
-    Player.KEYS[key].voice.on();
-  }
-
-  keyUp(key) {
-    Player.KEYS[key].voice.off();
-  }
-
   keyDownHandler(e) {
     if (!Player.KEYS[e.key]) {
       return;
     }
-    this.keyDown(e.key);
+    Player.KEYS[e.key].voice.on();
   }
 
   keyUpHandler(e) {
-    this.keyUp(e.key);
+    Player.KEYS[e.key].voice.off();
+  }
+
+  waveSelectHandler(e) {
+    this.setType(e.value);
+  };
+
+  setType(type) {
+    KEYNAMES.forEach((key) => {
+      Player.KEYS[key].voice.setType(type)
+      console.log(Player.KEYS[key].voice)
+    })
   }
 }
 
+const KEYNAMES = ['a', 'w', 's', 'e', 'd', 'f','t', 'g', 'y', 'h', 'u', 'j', 'k', 'o', 'l', 'p', ';'];
 const _KEYS = {
   'a': {voice: new Voice({frequency: 130.81})},
   'w': {voice: new Voice({frequency: 138.59})},

@@ -17,7 +17,7 @@ function () {
     var context = new window.AudioContext() || window.webkitAudioContext();
     var osc = context.createOscillator();
     var gainControl = context.createGain();
-    osc.type = 'square';
+    osc.type = type || 'sine';
     gainControl.gain.value = 0;
     osc.connect(gainControl);
     gainControl.connect(context.destination);
@@ -26,6 +26,7 @@ function () {
     this.osc = osc;
     this.gainControl = gainControl;
     this.context = context;
+    this.frequency = frequency;
   }
 
   _createClass(Voice, [{
@@ -37,6 +38,17 @@ function () {
     key: "off",
     value: function off() {
       this.gainControl.gain.value = 0;
+    }
+  }, {
+    key: "setType",
+    value: function setType(type) {
+      delete this.osc;
+      var osc = this.context.createOscillator();
+      osc.type = type || 'sine';
+      osc.connect(this.gainControl);
+      osc.frequency.setValueAtTime(frequency, context.currentTime);
+      osc.start();
+      this.osc = osc;
     }
   }]);
 
@@ -51,28 +63,31 @@ function () {
   }
 
   _createClass(Player, [{
-    key: "keyDown",
-    value: function keyDown(key) {
-      Player.KEYS[key].voice.on();
-    }
-  }, {
-    key: "keyUp",
-    value: function keyUp(key) {
-      Player.KEYS[key].voice.off();
-    }
-  }, {
     key: "keyDownHandler",
     value: function keyDownHandler(e) {
       if (!Player.KEYS[e.key]) {
         return;
       }
 
-      this.keyDown(e.key);
+      Player.KEYS[e.key].voice.on();
     }
   }, {
     key: "keyUpHandler",
     value: function keyUpHandler(e) {
-      this.keyUp(e.key);
+      Player.KEYS[e.key].voice.off();
+    }
+  }, {
+    key: "waveSelectHandler",
+    value: function waveSelectHandler(e) {
+      this.setType(e.value);
+    }
+  }, {
+    key: "setType",
+    value: function setType(type) {
+      KEYNAMES.forEach(function (key) {
+        Player.KEYS[key].voice.setType(type);
+        console.log(Player.KEYS[key].voice);
+      });
     }
   }], [{
     key: "KEYS",
@@ -84,6 +99,7 @@ function () {
   return Player;
 }();
 
+var KEYNAMES = ['a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j', 'k', 'o', 'l', 'p', ';'];
 var _KEYS = {
   'a': {
     voice: new Voice({

@@ -9,6 +9,12 @@
 
   <body>
     <div class="panel">
+      <select id="wave-select">
+        <option value="sine">sine</option>
+        <option value="square">square</option>
+        <option value="triangle">triangle</option>
+        <option value="sawtooth">sawtooth</option>
+      </select>
       <div class="img-box">
         <img src="assets/piano.png" alt="piano keys">
       </div>
@@ -17,6 +23,7 @@
       var mainPlayer = new Player({ });
       document.addEventListener('keydown', mainPlayer.keyDownHandler.bind(mainPlayer));
       document.addEventListener('keyup', mainPlayer.keyUpHandler.bind(mainPlayer));
+      document.getElementById('wave-select').addEventListener('change', mainPlayer.waveSelectHandler.bind(mainPlayer));
     </script>
   </body>
 </html>
