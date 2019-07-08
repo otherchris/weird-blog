@@ -46,7 +46,7 @@ function () {
       var osc = this.context.createOscillator();
       osc.type = type || 'sine';
       osc.connect(this.gainControl);
-      osc.frequency.setValueAtTime(frequency, context.currentTime);
+      osc.frequency.setValueAtTime(this.frequency, this.context.currentTime);
       osc.start();
       this.osc = osc;
     }
