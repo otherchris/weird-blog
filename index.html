@@ -9,6 +9,16 @@
 
   <body>
     <div class="panel">
+      <div id="wave-select">
+        <input type="radio" name="wave-select" value="sine" id="wave-select-sine">
+        <label for="wave-select-sine">sine</label>
+        <input type="radio" name="wave-select" value="square" id="wave-select-square">
+        <label for="wave-select-square">square</label>
+        <input type="radio" name="wave-select" value="triangle" id="wave-select-triangle">
+        <label for="wave-select-triangle">triangle</label>
+        <input type="radio" name="wave-select" value="sawtooth" id="wave-select-sawtooth">
+        <label for="wave-select-sawtooth">sawtooth</label>
+      </div>
       <div class="img-box">
         <img src="assets/piano.png" alt="piano keys">
       </div>
@@ -17,6 +27,7 @@
       var mainPlayer = new Player({ });
       document.addEventListener('keydown', mainPlayer.keyDownHandler.bind(mainPlayer));
       document.addEventListener('keyup', mainPlayer.keyUpHandler.bind(mainPlayer));
+      document.getElementById('wave-select').addEventListener('change', mainPlayer.waveSelectHandler.bind(mainPlayer));
     </script>
   </body>
 </html>

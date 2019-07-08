@@ -17,7 +17,7 @@ function () {
     var context = new window.AudioContext() || window.webkitAudioContext();
     var osc = context.createOscillator();
     var gainControl = context.createGain();
-    osc.type = 'square';
+    osc.type = type || 'sine';
     gainControl.gain.value = 0;
     osc.connect(gainControl);
     gainControl.connect(context.destination);
@@ -26,6 +26,7 @@ function () {
     this.osc = osc;
     this.gainControl = gainControl;
     this.context = context;
+    this.frequency = frequency;
   }
 
   _createClass(Voice, [{
@@ -38,6 +39,17 @@ function () {
     value: function off() {
       this.gainControl.gain.value = 0;
     }
+  }, {
+    key: "setType",
+    value: function setType(type) {
+      delete this.osc;
+      var osc = this.context.createOscillator();
+      osc.type = type || 'sine';
+      osc.connect(this.gainControl);
+      osc.frequency.setValueAtTime(frequency, context.currentTime);
+      osc.start();
+      this.osc = osc;
+    }
   }]);
 
   return Voice;
@@ -48,126 +60,154 @@ var Player =
 function () {
   function Player(params) {
     _classCallCheck(this, Player);
+
+    this.voices = setVoices('sine');
+    console.log(this.voices);
   }
 
   _createClass(Player, [{
-    key: "keyDown",
-    value: function keyDown(key) {
-      Player.KEYS[key].voice.on();
-    }
-  }, {
-    key: "keyUp",
-    value: function keyUp(key) {
-      Player.KEYS[key].voice.off();
-    }
-  }, {
     key: "keyDownHandler",
     value: function keyDownHandler(e) {
-      if (!Player.KEYS[e.key]) {
+      if (!this.voices[e.key]) {
         return;
       }
 
-      this.keyDown(e.key);
+      this.voices[e.key].voice.on();
     }
   }, {
     key: "keyUpHandler",
     value: function keyUpHandler(e) {
-      this.keyUp(e.key);
+      if (!this.voices[e.key]) {
+        return;
+      }
+
+      this.voices[e.key].voice.off();
     }
-  }], [{
-    key: "KEYS",
-    get: function get() {
-      return _KEYS;
+  }, {
+    key: "waveSelectHandler",
+    value: function waveSelectHandler(e) {
+      this.setType(e.target.value);
+    }
+  }, {
+    key: "setType",
+    value: function setType(type) {
+      delete this.voices;
+      this.voices = setVoices(type);
     }
   }]);
 
   return Player;
 }();
 
-var _KEYS = {
-  'a': {
-    voice: new Voice({
-      frequency: 130.81
-    })
-  },
-  'w': {
-    voice: new Voice({
-      frequency: 138.59
-    })
-  },
-  's': {
-    voice: new Voice({
-      frequency: 146.83
-    })
-  },
-  'e': {
-    voice: new Voice({
-      frequency: 155.56
-    })
-  },
-  'd': {
-    voice: new Voice({
-      frequency: 164.81
-    })
-  },
-  'f': {
-    voice: new Voice({
-      frequency: 174.61
-    })
-  },
-  't': {
-    voice: new Voice({
-      frequency: 185.01
-    })
-  },
-  'g': {
-    voice: new Voice({
-      frequency: 196.01
-    })
-  },
-  'y': {
-    voice: new Voice({
-      frequency: 207.65
-    })
-  },
-  'h': {
-    voice: new Voice({
-      frequency: 220.00
-    })
-  },
-  'u': {
-    voice: new Voice({
-      frequency: 233.08
-    })
-  },
-  'j': {
-    voice: new Voice({
-      frequency: 246.94
-    })
-  },
-  'k': {
-    voice: new Voice({
-      frequency: 261.63
-    })
-  },
-  'o': {
-    voice: new Voice({
-      frequency: 277.18
-    })
-  },
-  'l': {
-    voice: new Voice({
-      frequency: 293.66
-    })
-  },
-  'p': {
-    voice: new Voice({
-      frequency: 311.13
-    })
-  },
-  ';': {
-    voice: new Voice({
-      frequency: 329.63
-    })
-  }
+var setVoices = function setVoices(type) {
+  return _KEYS(type);
+};
+
+var KEYNAMES = ['a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j', 'k', 'o', 'l', 'p', ';'];
+
+var _KEYS = function _KEYS(type) {
+  return {
+    'a': {
+      voice: new Voice({
+        frequency: 130.81,
+        type: type
+      })
+    },
+    'w': {
+      voice: new Voice({
+        frequency: 138.59,
+        type: type
+      })
+    },
+    's': {
+      voice: new Voice({
+        frequency: 146.83,
+        type: type
+      })
+    },
+    'e': {
+      voice: new Voice({
+        frequency: 155.56,
+        type: type
+      })
+    },
+    'd': {
+      voice: new Voice({
+        frequency: 164.81,
+        type: type
+      })
+    },
+    'f': {
+      voice: new Voice({
+        frequency: 174.61,
+        type: type
+      })
+    },
+    't': {
+      voice: new Voice({
+        frequency: 185.01,
+        type: type
+      })
+    },
+    'g': {
+      voice: new Voice({
+        frequency: 196.01,
+        type: type
+      })
+    },
+    'y': {
+      voice: new Voice({
+        frequency: 207.65,
+        type: type
+      })
+    },
+    'h': {
+      voice: new Voice({
+        frequency: 220.00,
+        type: type
+      })
+    },
+    'u': {
+      voice: new Voice({
+        frequency: 233.08,
+        type: type
+      })
+    },
+    'j': {
+      voice: new Voice({
+        frequency: 246.94,
+        type: type
+      })
+    },
+    'k': {
+      voice: new Voice({
+        frequency: 261.63,
+        type: type
+      })
+    },
+    'o': {
+      voice: new Voice({
+        frequency: 277.18,
+        type: type
+      })
+    },
+    'l': {
+      voice: new Voice({
+        frequency: 293.66,
+        type: type
+      })
+    },
+    'p': {
+      voice: new Voice({
+        frequency: 311.13,
+        type: type
+      })
+    },
+    ';': {
+      voice: new Voice({
+        frequency: 329.63,
+        type: type
+      })
+    }
+  };
 };
