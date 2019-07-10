@@ -39,17 +39,6 @@ function () {
     value: function off() {
       this.gainControl.gain.value = 0;
     }
-  }, {
-    key: "setType",
-    value: function setType(type) {
-      delete this.osc;
-      var osc = this.context.createOscillator();
-      osc.type = type || 'sine';
-      osc.connect(this.gainControl);
-      osc.frequency.setValueAtTime(frequency, context.currentTime);
-      osc.start();
-      this.osc = osc;
-    }
   }]);
 
   return Voice;
@@ -62,7 +51,6 @@ function () {
     _classCallCheck(this, Player);
 
     this.voices = setVoices('sine');
-    console.log(this.voices);
     this.sustain = false;
     this.sustainDuration = 800;
   }
@@ -76,8 +64,6 @@ function () {
         if (this.voices[e.key].voice.gainControl.gain.value === 0) {
           this.voices[e.key].voice.on();
           setTimeout(function () {
-            console.log("off");
-
             _this.voices[e.key].voice.off();
           }, this.sustainDuration);
         }

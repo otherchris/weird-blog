@@ -27,17 +27,6 @@ class Voice {
   off() {
     this.gainControl.gain.value = 0;
   }
-
-  setType(type) {
-    delete this.osc
-    const osc = this.context.createOscillator();
-    osc.type = type || 'sine';
-    osc.connect(this.gainControl);
-    osc.frequency.setValueAtTime(frequency, context.currentTime);
-    osc.start();
-
-    this.osc = osc;
-  }
 }
 
 class Player {
