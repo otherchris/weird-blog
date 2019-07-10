@@ -43,10 +43,20 @@ class Voice {
 class Player {
   constructor(params) {
     this.voices = setVoices('sine');
-    console.log(this.voices)
+    this.sustain = false;
+    this.sustainDuration = 800;
   }
 
   keyDownHandler(e) {
+    if (this.sustain) {
+      if (this.voices[e.key].voice.gainControl.gain.value === 0) {
+        this.voices[e.key].voice.on();
+        setTimeout(() => {
+          this.voices[e.key].voice.off();
+        }, this.sustainDuration);
+      }
+      return;
+    }
     if (!this.voices[e.key]) {
       return;
     }
@@ -54,6 +64,9 @@ class Player {
   }
 
   keyUpHandler(e) {
+    if (this.sustain) {
+      return;
+    }
     if (!this.voices[e.key]) {
       return;
     }
@@ -62,11 +75,15 @@ class Player {
 
   waveSelectHandler(e) {
     this.setType(e.target.value);
-  };
+  }
 
   setType(type) {
     delete this.voices;
     this.voices = setVoices(type);
+  }
+
+  sustainSelectHandler(e) {
+    this.sustain = e.target.checked;
   }
 }
 

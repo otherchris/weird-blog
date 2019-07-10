@@ -63,11 +63,28 @@ function () {
 
     this.voices = setVoices('sine');
     console.log(this.voices);
+    this.sustain = false;
+    this.sustainDuration = 800;
   }
 
   _createClass(Player, [{
     key: "keyDownHandler",
     value: function keyDownHandler(e) {
+      var _this = this;
+
+      if (this.sustain) {
+        if (this.voices[e.key].voice.gainControl.gain.value === 0) {
+          this.voices[e.key].voice.on();
+          setTimeout(function () {
+            console.log("off");
+
+            _this.voices[e.key].voice.off();
+          }, this.sustainDuration);
+        }
+
+        return;
+      }
+
       if (!this.voices[e.key]) {
         return;
       }
@@ -77,6 +94,10 @@ function () {
   }, {
     key: "keyUpHandler",
     value: function keyUpHandler(e) {
+      if (this.sustain) {
+        return;
+      }
+
       if (!this.voices[e.key]) {
         return;
       }
@@ -93,6 +114,11 @@ function () {
     value: function setType(type) {
       delete this.voices;
       this.voices = setVoices(type);
+    }
+  }, {
+    key: "sustainSelectHandler",
+    value: function sustainSelectHandler(e) {
+      this.sustain = e.target.checked;
     }
   }]);
 

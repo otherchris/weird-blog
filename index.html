@@ -9,6 +9,10 @@
 
   <body>
     <div class="panel">
+      <div id="sustain-select">
+        <input type="checkbox" id="sustain-checkbox">
+        <label for-"sustain-checkbox">sustain</label>
+      </div>
       <div id="wave-select">
         <input type="radio" name="wave-select" value="sine" id="wave-select-sine">
         <label for="wave-select-sine">sine</label>
@@ -28,6 +32,7 @@
       document.addEventListener('keydown', mainPlayer.keyDownHandler.bind(mainPlayer));
       document.addEventListener('keyup', mainPlayer.keyUpHandler.bind(mainPlayer));
       document.getElementById('wave-select').addEventListener('change', mainPlayer.waveSelectHandler.bind(mainPlayer));
+      document.getElementById('sustain-select').addEventListener('change', mainPlayer.sustainSelectHandler.bind(mainPlayer));
     </script>
   </body>
 </html>
