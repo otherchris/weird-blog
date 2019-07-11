@@ -56,6 +56,11 @@ function () {
   }
 
   _createClass(Player, [{
+    key: "sustainRangeHandler",
+    value: function sustainRangeHandler(e) {
+      this.sustainDuration = e.target.value;
+    }
+  }, {
     key: "keyDownHandler",
     value: function keyDownHandler(e) {
       var _this = this;

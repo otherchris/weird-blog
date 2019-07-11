@@ -13,6 +13,10 @@
         <input type="checkbox" id="sustain-checkbox">
         <label for-"sustain-checkbox">sustain</label>
       </div>
+      <div id="sustain-range">
+        <input type="range" id="sustain-range" min="50" max="2000">
+        <label for-"sustain-range">sustain (ms)</label>
+      </div>
       <div id="wave-select">
         <input type="radio" name="wave-select" value="sine" id="wave-select-sine">
         <label for="wave-select-sine">sine</label>
@@ -33,6 +37,7 @@
       document.addEventListener('keyup', mainPlayer.keyUpHandler.bind(mainPlayer));
       document.getElementById('wave-select').addEventListener('change', mainPlayer.waveSelectHandler.bind(mainPlayer));
       document.getElementById('sustain-select').addEventListener('change', mainPlayer.sustainSelectHandler.bind(mainPlayer));
+      document.getElementById('sustain-range').addEventListener('change', mainPlayer.sustainRangeHandler.bind(mainPlayer));
     </script>
   </body>
 </html>

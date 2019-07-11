@@ -36,6 +36,10 @@ class Player {
     this.sustainDuration = 800;
   }
 
+  sustainRangeHandler(e) {
+    this.sustainDuration = e.target.value;
+  }
+
   keyDownHandler(e) {
     if (this.sustain) {
       if (this.voices[e.key].voice.gainControl.gain.value === 0) {
