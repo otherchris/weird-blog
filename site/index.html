@@ -9,6 +9,10 @@
 
   <body>
     <div class="panel">
+      <div id="gain-range">
+        <input type="range" id="gain-range" min="0" max="99">
+        <label for-"gain-range">volume</label>
+      </div>
       <div id="sustain-select">
         <input type="checkbox" id="sustain-checkbox">
         <label for-"sustain-checkbox">sustain</label>
@@ -38,6 +42,7 @@
       document.getElementById('wave-select').addEventListener('change', mainPlayer.waveSelectHandler.bind(mainPlayer));
       document.getElementById('sustain-select').addEventListener('change', mainPlayer.sustainSelectHandler.bind(mainPlayer));
       document.getElementById('sustain-range').addEventListener('change', mainPlayer.sustainRangeHandler.bind(mainPlayer));
+      document.getElementById('gain-range').addEventListener('change', mainPlayer.gainRangeHandler.bind(mainPlayer));
     </script>
   </body>
 </html>

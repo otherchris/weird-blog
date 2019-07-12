@@ -30,9 +30,9 @@ function () {
   }
 
   _createClass(Voice, [{
-    key: "on",
-    value: function on() {
-      this.gainControl.gain.value = 1;
+    key: "setGain",
+    value: function setGain(gain) {
+      this.gainControl.gain.value = gain;
     }
   }, {
     key: "off",
@@ -53,12 +53,23 @@ function () {
     this.voices = setVoices('sine');
     this.sustain = false;
     this.sustainDuration = 800;
+    this.masterGain = 1;
   }
 
   _createClass(Player, [{
+    key: "setVoiceGain",
+    value: function setVoiceGain(voice, gain) {
+      voice.setGain(gain);
+    }
+  }, {
     key: "sustainRangeHandler",
     value: function sustainRangeHandler(e) {
       this.sustainDuration = e.target.value;
+    }
+  }, {
+    key: "gainRangeHandler",
+    value: function gainRangeHandler(e) {
+      this.masterGain = e.target.value / 100;
     }
   }, {
     key: "keyDownHandler",
@@ -67,7 +78,7 @@ function () {
 
       if (this.sustain) {
         if (this.voices[e.key].voice.gainControl.gain.value === 0) {
-          this.voices[e.key].voice.on();
+          this.setVoiceGain(this.voices[e.key].voice, this.masterGain);
           setTimeout(function () {
             _this.voices[e.key].voice.off();
           }, this.sustainDuration);
@@ -80,7 +91,7 @@ function () {
         return;
       }
 
-      this.voices[e.key].voice.on();
+      this.setVoiceGain(this.voices[e.key].voice, this.masterGain);
     }
   }, {
     key: "keyUpHandler",

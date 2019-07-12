@@ -20,8 +20,8 @@ class Voice {
     this.frequency = frequency;
   }
 
-  on() {
-    this.gainControl.gain.value = 1;
+  setGain(gain) {
+    this.gainControl.gain.value = gain;
   }
 
   off() {
@@ -34,16 +34,25 @@ class Player {
     this.voices = setVoices('sine');
     this.sustain = false;
     this.sustainDuration = 800;
+    this.masterGain = 1;
+  }
+
+  setVoiceGain(voice, gain) {
+    voice.setGain(gain);
   }
 
   sustainRangeHandler(e) {
     this.sustainDuration = e.target.value;
   }
 
+  gainRangeHandler(e) {
+    this.masterGain = e.target.value / 100;
+  }
+
   keyDownHandler(e) {
     if (this.sustain) {
       if (this.voices[e.key].voice.gainControl.gain.value === 0) {
-        this.voices[e.key].voice.on();
+        this.setVoiceGain(this.voices[e.key].voice, this.masterGain);
         setTimeout(() => {
           this.voices[e.key].voice.off();
         }, this.sustainDuration);
@@ -53,7 +62,7 @@ class Player {
     if (!this.voices[e.key]) {
       return;
     }
-    this.voices[e.key].voice.on();
+    this.setVoiceGain(this.voices[e.key].voice, this.masterGain);
   }
 
   keyUpHandler(e) {
