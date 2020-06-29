@@ -3,6 +3,7 @@
   position: fixed;
   right: 0;
   bottom: 0;
+  min-width: 100%;
   min-height: 100%;
 }
 
@@ -30,4 +31,8 @@
 #myBtn:hover {
   background: #ddd;
   color: black;
+}
+
+body {
+  background-color: #000;
 }
