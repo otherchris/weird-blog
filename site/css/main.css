@@ -11,49 +11,63 @@
   /* animate the color */
   animation-duration: 20s;
   animation-iteration-count: infinite;
-  animation-name: background-dance; }
+  animation-name: background-dance;
+}
 
 div.img-box {
-  width: 100%; }
+  width: 100%;
+}
 
 div.img-box img {
   width: 100%;
-  object-fit: cover; }
+  object-fit: cover;
+}
 
 @keyframes background-dance {
   from {
     background-size: 300% 300%;
-    background-position: 0% 0%; }
+    background-position: 0% 0%;
+  }
   15% {
     background-size: 300% 300%;
-    background-position: 100% 100%; }
+    background-position: 100% 100%;
+  }
   34% {
     background-size: 300% 300%;
-    background-position: 50% 0%; }
+    background-position: 50% 0%;
+  }
   50% {
     background-size: 300% 300%;
-    background-position: 50% 100%; }
+    background-position: 50% 100%;
+  }
   67% {
     background-size: 300% 300%;
-    background-position: 0% 100%; }
+    background-position: 0% 100%;
+  }
   85% {
     background-size: 300% 300%;
-    background-position: 50% 50%; }
+    background-position: 50% 50%;
+  }
   to {
     background-size: 300% 300%;
-    background-position: 0% 0%; } }
+    background-position: 0% 0%;
+  }
+}
 div.go-button {
   display: flex;
   width: 66.7%;
   margin-left: 16.65%;
-  justify-content: space-evenly; }
+  justify-content: space-evenly;
+}
 
 div.text-input {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+}
 
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 body {
   animation-duration: 10s;
@@ -61,36 +75,49 @@ body {
   animation-name: colorfade;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly; }
+  justify-content: space-evenly;
+}
 
 @keyframes colorfade {
   from {
-    background-color: #feaaf6; }
+    background-color: #feaaf6;
+  }
   75% {
-    background-color: #aaf1fe; }
+    background-color: #aaf1fe;
+  }
   to {
-    background-color: #feaaf6; } }
+    background-color: #feaaf6;
+  }
+}
 @keyframes background-dance {
   from {
     background-size: 300% 300%;
-    background-position: 0% 0%; }
+    background-position: 0% 0%;
+  }
   15% {
     background-size: 300% 300%;
-    background-position: 100% 100%; }
+    background-position: 100% 100%;
+  }
   34% {
     background-size: 300% 300%;
-    background-position: 50% 0%; }
+    background-position: 50% 0%;
+  }
   50% {
     background-size: 300% 300%;
-    background-position: 50% 100%; }
+    background-position: 50% 100%;
+  }
   67% {
     background-size: 300% 300%;
-    background-position: 0% 100%; }
+    background-position: 0% 100%;
+  }
   85% {
     background-size: 300% 300%;
-    background-position: 50% 50%; }
+    background-position: 50% 50%;
+  }
   to {
     background-size: 300% 300%;
-    background-position: 0% 0%; } }
+    background-position: 0% 0%;
+  }
+}
 
 /*# sourceMappingURL=main.css.map */
