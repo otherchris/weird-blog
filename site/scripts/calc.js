@@ -1,7 +1,9 @@
 const showit = () => {
-const B = window.document.getElementById("biden").value
-const T = window.document.getElementById("trump").value
-const R = window.document.getElementById("remaining").value
+const B = parseInt(window.document.getElementById("biden").value.replace(/,/g, ''))
+const T = parseInt(window.document.getElementById("trump").value.replace(/,/g, ''))
+
+const R = parseInt(window.document.getElementById("remaining").value.replace(/,/g, ''))
+
 
 const display = window.document.getElementById("display")
 
