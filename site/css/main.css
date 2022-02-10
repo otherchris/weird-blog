@@ -65,6 +65,24 @@ div.text-input {
   flex-direction: column;
 }
 
+.picture-container {
+  display: flex;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.thumb-row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.thumb-box {
+  width: 320px;
+  height: 320px;
+  padding: 10px;
+}
+
 * {
   box-sizing: border-box;
 }

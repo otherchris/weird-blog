@@ -3,39 +3,13 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Main</title>
+    <title>Paperclipdent : Main</title>
     <link rel="stylesheet" href="css/main.css">
-    <script src="scripts/Player.js"></script>
   </head>
 
   <body>
     <div class="panel door">
       <img class="transpa" src="assets/farp.gif" alt="chatty convo">
-      <div id="gain-range">
-        <input type="range" id="gain-range" min="0" max="99">
-        <label for-"gain-range">volume</label>
-      </div>
-      <div id="sustain-select">
-        <input type="checkbox" id="sustain-checkbox">
-        <label for-"sustain-checkbox">sustain</label>
-      </div>
-      <div id="sustain-range">
-        <input type="range" id="sustain-range" min="50" max="2000">
-        <label for-"sustain-range">sustain (ms)</label>
-      </div>
-      <div id="wave-select">
-        <input type="radio" name="wave-select" value="sine" id="wave-select-sine">
-        <label for="wave-select-sine">sine</label>
-        <input type="radio" name="wave-select" value="square" id="wave-select-square">
-        <label for="wave-select-square">square</label>
-        <input type="radio" name="wave-select" value="triangle" id="wave-select-triangle">
-        <label for="wave-select-triangle">triangle</label>
-        <input type="radio" name="wave-select" value="sawtooth" id="wave-select-sawtooth">
-        <label for="wave-select-sawtooth">sawtooth</label>
-      </div>
-      <div class="img-box">
-        <img src="assets/piano.png" alt="piano keys">
-      </div>
       <div>
         <a href="https://chrisrudy502.itch.io/crackeldog">
           <img src="assets/smalldog.png" alt="small dog">
@@ -50,14 +24,5 @@
         <img width=400 src="assets/arm2.gif" alt="wiggle">
       </div>
     </div>
-    <script>
-      var mainPlayer = new Player({ });
-      document.addEventListener('keydown', mainPlayer.keyDownHandler.bind(mainPlayer));
-      document.addEventListener('keyup', mainPlayer.keyUpHandler.bind(mainPlayer));
-      document.getElementById('wave-select').addEventListener('change', mainPlayer.waveSelectHandler.bind(mainPlayer));
-      document.getElementById('sustain-select').addEventListener('change', mainPlayer.sustainSelectHandler.bind(mainPlayer));
-      document.getElementById('sustain-range').addEventListener('change', mainPlayer.sustainRangeHandler.bind(mainPlayer));
-      document.getElementById('gain-range').addEventListener('change', mainPlayer.gainRangeHandler.bind(mainPlayer));
-    </script>
   </body>
 </html>
