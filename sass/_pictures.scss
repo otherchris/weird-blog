@@ -11,7 +11,10 @@
 }
 
 .thumb-box {
+  border: 1px 1px black;
   width: 320px;
   height: 320px;
-  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
