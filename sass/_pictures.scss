@@ -18,3 +18,48 @@
   align-items: center;
   justify-content: space-around;
 }
+
+
+
+.picture-page-container {
+  display: flex;
+  width: 80%;
+  height: 90vh;
+  margin-top: 5vh;
+  justify-content: space-between;
+}
+
+.picture-page-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 33.3%;
+}
+
+.picture-page-caption {
+  font-family: serif;
+  font-size: 3rem;
+}
+
+.picture-page-nav {
+  margin-top: 33vh;
+}
+
+.picture-page-picture {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  width: 66.7%;
+  align-content: center;
+}
+
+.picture-page-picture img {
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.title-row {
+  font-size: 3rem;
+  margin-top: 2rem;
+}
