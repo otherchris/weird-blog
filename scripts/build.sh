@@ -1,7 +1,7 @@
 #! /bin/bash
 
-# Build styles
-sass sass/main.scss site/css/main.css
+# # Build styles
+# sass sass/main.scss site/css/main.css
 
 # # Build js files
 # npm run build
